@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+final apiKey = dotenv.env['OPENWEATHER_API_KEY'];
 class Worker {
  late String location;
   Worker({String? loc}){
@@ -18,7 +19,7 @@ class Worker {
     try{
       Response response = await get(
         Uri.parse(
-          "https://api.openweathermap.org/data/2.5/weather?q=$location&appid=63e6bd7104b9da689080ba83f7780ee3&units=metric",
+          "https://api.openweathermap.org/data/2.5/weather?q=$location&appid=$apiKey&units=metric",
         ),
       );
       Map data = jsonDecode(response.body);
